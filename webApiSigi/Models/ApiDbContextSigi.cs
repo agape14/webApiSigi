@@ -719,9 +719,10 @@ public partial class ApiDbContextSigi : DbContext
 
         modelBuilder.Entity<TActoAnulacion>(entity =>
         {
-            entity
-                .HasNoKey()
-                .ToTable("t_acto_anulacion");
+            entity.HasKey(e => e.CodActoAnulacion).HasName("PK__t_acto_anulacion__5692A6CAF9294AAC");
+
+            entity.ToTable("t_acto_anulacion", tb => tb.HasTrigger("trg_t_acto_anulacion"));
+
 
             entity.Property(e => e.ActoConclu).HasColumnName("actoConclu");
             entity.Property(e => e.Administrado)
@@ -796,9 +797,8 @@ public partial class ApiDbContextSigi : DbContext
 
         modelBuilder.Entity<TActoBeneficiario>(entity =>
         {
-            entity
-                .HasNoKey()
-                .ToTable("t_acto_beneficiario");
+            entity.HasKey(e => e.CodBenef).HasName("PK__t_acto_beneficiario__5692A6CAF9294AAC");
+            entity.ToTable("t_acto_beneficiario", tb => tb.HasTrigger("trg_t_acto_beneficiario"));
 
             entity.Property(e => e.CodActo).HasColumnName("codActo");
             entity.Property(e => e.CodBenef).HasColumnName("codBenef");
@@ -817,10 +817,9 @@ public partial class ApiDbContextSigi : DbContext
 
         modelBuilder.Entity<TAperturaCierreInmueble>(entity =>
         {
-            entity
-                .HasNoKey()
-                .ToTable("t_apertura_cierre_inmueble");
-
+            entity.HasKey(e => e.CodAperturaCierreInmueble).HasName("PK__t_apertura_cierre_inmueble__5692A6CAF9294AAC");
+            entity.ToTable("t_apertura_cierre_inmueble", tb => tb.HasTrigger("trg_t_apertura_cierre_inmueble"));
+            
             entity.Property(e => e.Anio)
                 .HasMaxLength(4)
                 .IsUnicode(false)
@@ -907,9 +906,9 @@ public partial class ApiDbContextSigi : DbContext
 
         modelBuilder.Entity<TCarga>(entity =>
         {
-            entity
-                .HasNoKey()
-                .ToTable("t_carga");
+            entity.HasKey(e => e.CodCarga);
+
+            entity.ToTable("t_carga");
 
             entity.Property(e => e.Carga)
                 .HasMaxLength(6)

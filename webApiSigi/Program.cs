@@ -7,6 +7,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
+// Load configuration from appsettings.json
+builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+
+
 builder.Services.AddDbContext<ApiDbContextSigi>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("conexionDbSigi")));
 
